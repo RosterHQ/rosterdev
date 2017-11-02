@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'rosterdev_Example' do
+  pod 'rosterdev', :path => '../'
+
+  target 'rosterdev_Tests' do
+    inherit! :search_paths
+  end
+end
