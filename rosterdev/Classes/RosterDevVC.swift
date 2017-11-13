@@ -29,9 +29,9 @@ public struct RosterDevRowContents {
     public var checkMark:(()->Bool)? = nil
     
     // Action to occur when tapping this row, if any.
-    public let action:(()->())?
+    public let action:((_ parentVC: UIViewController)->())?
     
-    public init(name:String, action:(()->())? = nil) {
+    public init(name:String, action:((_ parentVC: UIViewController)->())? = nil) {
         self.name = name
         self.action = action
     }
@@ -71,14 +71,14 @@ public class RosterDevVC: UIViewController {
         
         if options.contains(.injectionTests) {
             var testSection = [RosterDevRowContents]()
-            let testCases = RosterDevRowContents(name: "Test cases", action: {
+            let testCases = RosterDevRowContents(name: "Test cases", action: { parentVC in
                 let testCasesVC = UIStoryboard(name: "Developer", bundle: bundle).instantiateViewController(withIdentifier: "InjectionTestVC")
                 nav.pushViewController(testCasesVC, animated: true)
             })
             testSection += [testCases]
             
             if options.contains(.runTestsMultipleTimes) {
-                var runTestsMultipleTimes = RosterDevRowContents(name: "Run tests multiple times", action: {
+                var runTestsMultipleTimes = RosterDevRowContents(name: "Run tests multiple times", action: { parentVC in
                     RosterDevInjectTestObjC.session().runTestsMultipleTimes = !RosterDevInjectTestObjC.session().runTestsMultipleTimes
                 })
                 runTestsMultipleTimes.checkMark = {
@@ -138,7 +138,7 @@ extension RosterDevVC : UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contents = getContents(forRowAtIndexPath: indexPath)
         if let action = contents.action {
-            action()
+            action(self)
         }
         
         UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {
