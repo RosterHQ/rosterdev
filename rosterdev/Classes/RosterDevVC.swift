@@ -45,6 +45,9 @@ public class RosterDevVC: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Developer Dashboard"
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
