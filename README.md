@@ -51,10 +51,10 @@ class DebugDashboardData {
     static let session = DebugDashboardData()
     
     var debugDashboardExampleSection: [RosterDevRowContents] = {
-        var useDev = RosterDevRowContents(name: "Use staging environment", action: {
+        var useDev = RosterDevRowContents(name: "Use staging environment", action: { parentVC in
             // Need to do something to setup staging environment
         })
-        var useProd = RosterDevRowContents(name: "Use prod environment", action: {
+        var useProd = RosterDevRowContents(name: "Use prod environment", action: { parentVC in
             // Need to do something to setup prod environment
         })
         
