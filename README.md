@@ -67,7 +67,7 @@ class DebugDashboardData {
 }
 ```
 
-To use this class, add `DebugDashboardData.session.sections()` to the `rowContents` parameter.
+To use this class, use `DebugDashboardData.session.sections()` to the `rowContents` parameter.
 
 If you are doing test injection, you will need:
 
