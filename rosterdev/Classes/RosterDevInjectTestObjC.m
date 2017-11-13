@@ -1,24 +1,24 @@
 //
-//  InjectTestObjC.m
+//  RosterDevInjectTestObjC.m
 //  roster
 //
 //  Created by Christopher G Prince on 8/9/17.
 //  Copyright © 2017 roster. All rights reserved.
 //
 
-#import "InjectTestObjC.h"
+#import "RosterDevInjectTestObjC.h"
 
-@interface InjectTestObjC()
+@interface RosterDevInjectTestObjC()
 @property (nonatomic, strong) NSMutableDictionary *values;
 @end
 
-@implementation InjectTestObjC
+@implementation RosterDevInjectTestObjC
 
-#define USER_DEFS_KEY @"InjectTestObjc"
+#define USER_DEFS_KEY @"RosterDevInjectTestObjc"
 
 + (instancetype) session;
 {
-    static InjectTestObjC *session = nil;
+    static RosterDevInjectTestObjC *session = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         session = [self new];
@@ -88,7 +88,7 @@
 - (void) swiftRun: (NSString *) testCaseName ifOn: (void (^)(void)) callback;
 {    
 #ifdef DEBUG
-    InjectTestIf(testCaseName, {
+    RosterDevInjectTestIf(testCaseName, {
         if (callback) {
             callback();
         }

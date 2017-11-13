@@ -1,5 +1,5 @@
 //
-//  InjectTestObjC.h
+//  RosterDevInjectTestObjC.h
 //  roster
 //
 //  Created by Christopher G Prince on 8/9/17.
@@ -13,18 +13,18 @@
 #import <Foundation/Foundation.h>
 
 #ifdef DEBUG
-#define InjectTestIf(testCaseName, testCode)\
-    if ([[InjectTestObjC session] testIsOn:testCaseName]) {\
-        if (![InjectTestObjC session].runTestsMultipleTimes) {\
-            [[InjectTestObjC session] setTest:testCaseName valueTo:NO];\
+#define RosterDevInjectTestIf(testCaseName, testCode)\
+    if ([[RosterDevInjectTestObjC session] testIsOn:testCaseName]) {\
+        if (![RosterDevInjectTestObjC session].runTestsMultipleTimes) {\
+            [[RosterDevInjectTestObjC session] setTest:testCaseName valueTo:NO];\
         }\
         testCode;\
     }
 #else
-#define InjectTestIf(TestName, TestCode)
+#define RosterDevInjectTestIf(TestName, TestCode)
 #endif
 
-@interface InjectTestObjC : NSObject
+@interface RosterDevInjectTestObjC : NSObject
 
 + (instancetype) session;
 

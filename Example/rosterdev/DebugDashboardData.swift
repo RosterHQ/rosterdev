@@ -17,8 +17,10 @@ class DebugDashboardData {
     
     var debugDashboardExampleSection: [RosterDevRowContents] = {
         var useDev = RosterDevRowContents(name: "Use staging environment", action: {
+            // Need to do something to setup staging environment
         })
         var useProd = RosterDevRowContents(name: "Use prod environment", action: {
+            // Need to do something to setup prod environment
         })
         
         return [useDev, useProd]

@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "InjectTestObjC.h"
+#import "RosterDevInjectTestObjC.h"
 
 @interface InjectionTestObjcTests : XCTestCase
 @end
@@ -16,8 +16,8 @@
 
 - (void)setUp {
     [super setUp];
-    [InjectTestObjC session].runTestsMultipleTimes = NO;
-    [[InjectTestObjC session] reset];
+    [RosterDevInjectTestObjC session].runTestsMultipleTimes = NO;
+    [[RosterDevInjectTestObjC session] reset];
 }
 
 - (void)tearDown {
@@ -27,15 +27,15 @@
 
 - (void) testCaseNamesGetSorted;
 {
-    [[InjectTestObjC session] setTest:@"d" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"c" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"b" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"a" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"f" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"g" valueTo:NO];
-    [[InjectTestObjC session] setTest:@"e" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"d" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"c" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"b" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"a" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"f" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"g" valueTo:NO];
+    [[RosterDevInjectTestObjC session] setTest:@"e" valueTo:NO];
 
-    NSArray *sortedNames = [InjectTestObjC session].sortedTestCaseNames;
+    NSArray *sortedNames = [RosterDevInjectTestObjC session].sortedTestCaseNames;
     
     NSArray *comparisonArray = @[@"a", @"b", @"c", @"d", @"e", @"f", @"g"];
     
@@ -44,61 +44,61 @@
 
 - (void) testTestDoesNotRunByDefault {
     BOOL testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(!testRan);
 }
 
 - (void) testTestRunsIfYouTurnItOn {
-    [[InjectTestObjC session] setTest:@"Test1" valueTo:YES];
+    [[RosterDevInjectTestObjC session] setTest:@"Test1" valueTo:YES];
     BOOL testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(testRan);
 }
 
 - (void) testTestOnlyRunOnceIfYouTurnItOn {
-    [[InjectTestObjC session] setTest:@"Test1" valueTo:YES];
+    [[RosterDevInjectTestObjC session] setTest:@"Test1" valueTo:YES];
     
     BOOL testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(testRan);
     
     testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(!testRan);
 }
 
 - (void) testTestRunMoreThanOnceIfYouAllowIt {
-    [InjectTestObjC session].runTestsMultipleTimes = YES;
-    [[InjectTestObjC session] setTest:@"Test1" valueTo:YES];
+    [RosterDevInjectTestObjC session].runTestsMultipleTimes = YES;
+    [[RosterDevInjectTestObjC session] setTest:@"Test1" valueTo:YES];
     
     BOOL testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(testRan);
     
     testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     XCTAssert(testRan);
 }
 
 - (void) testMultipleStatementsRun {
-    [[InjectTestObjC session] setTest:@"Test1" valueTo:YES];
+    [[RosterDevInjectTestObjC session] setTest:@"Test1" valueTo:YES];
     
     BOOL testRan = NO;
     BOOL testRan2 = NO;
     
-    InjectTestIf(@"Test1",
+    RosterDevInjectTestIf(@"Test1",
         testRan = YES;
         testRan2 = YES;
     );
@@ -111,7 +111,7 @@
     BOOL testRan = NO;
     BOOL testRan2 = NO;
     
-    InjectTestIf(@"Test1",
+    RosterDevInjectTestIf(@"Test1",
         testRan = YES;
         testRan2 = YES;
     );

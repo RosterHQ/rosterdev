@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#import "InjectTestObjC.h"
+#import "RosterDevInjectTestObjC.h"
 
 FOUNDATION_EXPORT double rosterdevVersionNumber;
 FOUNDATION_EXPORT const unsigned char rosterdevVersionString[];
