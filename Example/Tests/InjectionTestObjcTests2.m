@@ -11,7 +11,7 @@
 #import <XCTest/XCTest.h>
 
 #undef DEBUG
-#import "InjectTestObjC.h"
+#import "RosterDevInjectTestObjC.h"
 
 @interface InjectionTestObjcTests2 : XCTestCase
 @end
@@ -29,10 +29,10 @@
 }
 
 - (void) testDoesNotRunWithDEBUGNotDefined {
-    [[InjectTestObjC session] setTest:@"Test1" valueTo:YES];
+    [[RosterDevInjectTestObjC session] setTest:@"Test1" valueTo:YES];
     
     BOOL testRan = NO;
-    InjectTestIf(@"Test1", {
+    RosterDevInjectTestIf(@"Test1", {
         testRan = YES;
     });
     

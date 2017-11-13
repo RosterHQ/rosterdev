@@ -11,7 +11,7 @@ import UIKit
 
 class InjectionTestVC : UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    fileprivate let testCaseNames = InjectTest.sortedTestCaseNames
+    fileprivate let testCaseNames = RosterDevInjectTest.sortedTestCaseNames
     let cellReuseId = "TestCaseCell"
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ extension InjectionTestVC : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath)
         
         let testCaseName = testCaseNames[indexPath.row]
-        let testCaseIsOn = InjectTest.testIsOn(testCaseName)
+        let testCaseIsOn = RosterDevInjectTest.testIsOn(testCaseName)
 
         cell.textLabel?.text = testCaseName
         cell.accessoryType = testCaseIsOn ? .checkmark : .none
@@ -41,8 +41,8 @@ extension InjectionTestVC : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let testCaseName = testCaseNames[indexPath.row]
-        let testCaseIsOn = InjectTest.testIsOn(testCaseName)
-        InjectTest.set(testCaseName: testCaseName, value: !testCaseIsOn)
+        let testCaseIsOn = RosterDevInjectTest.testIsOn(testCaseName)
+        RosterDevInjectTest.set(testCaseName: testCaseName, value: !testCaseIsOn)
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }

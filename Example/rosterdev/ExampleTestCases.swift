@@ -22,7 +22,7 @@ class TestCases {
     }
     
     // Make these text names fairly short. They are presented in a UI.
-    let test1 = InjectTest.define(testCaseName: "This is test1")
-    let test2 = InjectTest.define(testCaseName: "This is test2")
-    let test3 = InjectTest.define(testCaseName: "This is test3")
+    let test1 = RosterDevInjectTest.define(testCaseName: "This is test1")
+    let test2 = RosterDevInjectTest.define(testCaseName: "This is test2")
+    let test3 = RosterDevInjectTest.define(testCaseName: "This is test3")
 }

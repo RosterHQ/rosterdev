@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-You can shake your app, when it's built for development (using a DEBUG flag) and bring up a development dashboard. This can be useful to change network API environments. A default option you can get is a list of tests you can inject-- e.g., to inject artificial errors, for hard to test edge cases, into your running program.
+Shake your app, when it's built for development (using a DEBUG flag), and bring up a development dashboard. This can be useful to change network API environments. With a default option, you can get a list of tests you can inject-- e.g., to inject artificial errors, for hard to test edge cases, into your running program.
                        DESC
 
   s.homepage         = 'https://github.com/RosterHQ/rosterdev'

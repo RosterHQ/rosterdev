@@ -13,7 +13,7 @@ class InjectionTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        InjectTest.runTestsMultipleTimes = false
+        RosterDevInjectTest.runTestsMultipleTimes = false
     }
     
     override func tearDown() {
@@ -24,7 +24,7 @@ class InjectionTests: XCTestCase {
     func testDoesNotRunByDefault() {
         var testRan = false
         
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         
@@ -32,10 +32,10 @@ class InjectionTests: XCTestCase {
     }
     
     func testRunsIfTurnedOn() {
-        InjectTest.set(testCaseName: "test1", value: true)
+        RosterDevInjectTest.set(testCaseName: "test1", value: true)
         var testRan = false
         
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         
@@ -43,17 +43,17 @@ class InjectionTests: XCTestCase {
     }
     
     func testRunsOnlyOnceByDefault() {
-        InjectTest.set(testCaseName: "test1", value: true)
+        RosterDevInjectTest.set(testCaseName: "test1", value: true)
         var testRan = false
         
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         
         XCTAssert(testRan)
 
         testRan = false
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         
@@ -61,18 +61,18 @@ class InjectionTests: XCTestCase {
     }
     
     func testRunsMultipleTimesWhenAllowed() {
-        InjectTest.runTestsMultipleTimes = true
-        InjectTest.set(testCaseName: "test1", value: true)
+        RosterDevInjectTest.runTestsMultipleTimes = true
+        RosterDevInjectTest.set(testCaseName: "test1", value: true)
         var testRan = false
         
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         
         XCTAssert(testRan)
 
         testRan = false
-        InjectTest.if("test1") { 
+        RosterDevInjectTest.if("test1") {
             testRan = true
         }
         

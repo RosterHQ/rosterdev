@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 #if DEBUG
@@ -50,8 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension UIWindow {
     override open func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            let rootVC = UIApplication.shared.keyWindow?.rootViewController!
-            DeveloperVC.show(fromViewController: rootVC!, rowContents: DebugDashboardData.session.sections(), options: .all)
+            if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+                RosterDevVC.show(fromViewController: rootVC, rowContents: DebugDashboardData.session.sections(), options: .all)
+            }
         }
     }
 }

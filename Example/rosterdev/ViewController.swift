@@ -13,8 +13,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        InjectTest.if(TestCases.session.test1) {
-            
+        RosterDevInjectTest.if(TestCases.session.test1) {
+            // Do whatever testing you need to do here. It will only run a) when the DEBUG build variable is set and b) the `test1` injection test is enabled.
         }
     }
 }

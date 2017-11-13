@@ -1,5 +1,5 @@
 //
-//  DeveloperVC.swift
+//  RosterDevVC.swift
 //  roster
 //
 //  Created by Christopher G Prince on 7/26/17.
@@ -29,15 +29,15 @@ public struct RosterDevRowContents {
     public var checkMark:(()->Bool)? = nil
     
     // Action to occur when tapping this row, if any.
-    public let action:(()->())?
+    public let action:((_ parentVC: UIViewController)->())?
     
-    public init(name:String, action:(()->())? = nil) {
+    public init(name:String, action:((_ parentVC: UIViewController)->())? = nil) {
         self.name = name
         self.action = action
     }
 }
 
-public class DeveloperVC: UIViewController {
+public class RosterDevVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var defaultSections = [[RosterDevRowContents]]()
     let cellReuseId = "DeveloperCell"
@@ -45,6 +45,9 @@ public class DeveloperVC: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Developer Dashboard"
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
@@ -56,8 +59,8 @@ public class DeveloperVC: UIViewController {
     
     public class func show(fromViewController vc: UIViewController, rowContents: [[RosterDevRowContents]], options: RosterDevOptions = .versionBuild) {
     
-        let bundle = Bundle(for: DeveloperVC.self)
-        let dev = UIStoryboard(name: "Developer", bundle: bundle).instantiateViewController(withIdentifier: "DeveloperVC") as! DeveloperVC
+        let bundle = Bundle(for: RosterDevVC.self)
+        let dev = UIStoryboard(name: "Developer", bundle: bundle).instantiateViewController(withIdentifier: "RosterDevVC") as! RosterDevVC
         
         let nav = UINavigationController(rootViewController: dev)
         
@@ -68,18 +71,18 @@ public class DeveloperVC: UIViewController {
         
         if options.contains(.injectionTests) {
             var testSection = [RosterDevRowContents]()
-            let testCases = RosterDevRowContents(name: "Test cases", action: {
+            let testCases = RosterDevRowContents(name: "Test cases", action: { parentVC in
                 let testCasesVC = UIStoryboard(name: "Developer", bundle: bundle).instantiateViewController(withIdentifier: "InjectionTestVC")
                 nav.pushViewController(testCasesVC, animated: true)
             })
             testSection += [testCases]
             
             if options.contains(.runTestsMultipleTimes) {
-                var runTestsMultipleTimes = RosterDevRowContents(name: "Run tests multiple times", action: {
-                    InjectTestObjC.session().runTestsMultipleTimes = !InjectTestObjC.session().runTestsMultipleTimes
+                var runTestsMultipleTimes = RosterDevRowContents(name: "Run tests multiple times", action: { parentVC in
+                    RosterDevInjectTestObjC.session().runTestsMultipleTimes = !RosterDevInjectTestObjC.session().runTestsMultipleTimes
                 })
                 runTestsMultipleTimes.checkMark = {
-                    return InjectTestObjC.session().runTestsMultipleTimes
+                    return RosterDevInjectTestObjC.session().runTestsMultipleTimes
                 }
                 testSection += [runTestsMultipleTimes]
             }
@@ -101,7 +104,7 @@ public class DeveloperVC: UIViewController {
     }
 }
 
-extension DeveloperVC : UITableViewDataSource, UITableViewDelegate {
+extension RosterDevVC : UITableViewDataSource, UITableViewDelegate {
     public func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -135,7 +138,7 @@ extension DeveloperVC : UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contents = getContents(forRowAtIndexPath: indexPath)
         if let action = contents.action {
-            action()
+            action(self)
         }
         
         UIView.transition(with: tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {
