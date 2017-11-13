@@ -12,12 +12,32 @@ rosterdev is available through [CocoaPods](http://cocoapods.org). To install
 it, add the following line to your Podfile:
 
 ```ruby
-pod 'rosterdev'
+pod 'rosterdev', '~> 0.1'
 ```
 
 The intent is that these developer functions will only be available in debug builds of your app. To accomplish this in Swift, [create a `DEBUG` `OTHER_SWIFT_FLAGS` for your debug build](./docs/debugFlag.png).
 
-You will also need to enable the debug dashboard to be displayed. One way to do this is via a shake gesture. [See the example here](Example/rosterdev/AppDelegate.swift).
+In your code, do:
+
+```
+import rosterdev
+```
+
+You will also need to enable the debug dashboard to be displayed. One way to do this is via a shake gesture. [See the example here](Example/rosterdev/AppDelegate.swift):
+
+```
+#if DEBUG
+extension UIWindow {
+    override open func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+                RosterDevVC.show(fromViewController: rootVC, rowContents: DebugDashboardData.session.sections(), options: .all)
+            }
+        }
+    }
+}
+#endif
+```
 
 And, if you are doing test injection, you will need:
 
@@ -27,7 +47,17 @@ And, if you are doing test injection, you will need:
 #endif
 ```
 
-in your AppDelegate. [See the example here](Example/rosterdev/AppDelegate.swift).
+in your AppDelegate. [See the example here](Example/rosterdev/AppDelegate.swift):
+
+```
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+#if DEBUG
+    TestCases.setup()
+#endif
+        return true
+    }
+```
 
 ## Author
 
