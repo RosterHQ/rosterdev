@@ -1,0 +1,19 @@
+# 1) Update the .podspec with the new version number
+
+# 2) validate the pod, without downloading
+pod lib lint
+
+# 3) then push updated revision of pod to its repo
+
+Use: Tools/release.sh
+
+# 4) validate the pod, with downloading
+pod spec lint
+
+# 5) Then, to push my podspec
+
+# Before you do this, you have to follow https://guides.cocoapods.org/making/getting-setup-with-trunk
+# i.e., something like:
+# 	pod trunk register chris.prince@withroster.com 'Christopher Prince' --description='Macbook Pro'
+
+pod trunk push rosterdev.podspec
