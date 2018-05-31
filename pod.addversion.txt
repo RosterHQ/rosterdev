@@ -5,7 +5,8 @@ pod lib lint
 
 # 3) then push updated revision of pod to its repo
 
-Use: Tools/release.sh
+Use: 
+	Tools/release.sh
 
 # 4) validate the pod, with downloading
 pod spec lint
